@@ -148,16 +148,20 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'WEBFULLSTACKPRACTICA',
+#         'USER' : 'postgres',
+#         'PASSWORD' : 'admin',
+#         'HOST' : 'localhost',
+#         'PORT' : '5432',
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'WEBFULLSTACKPRACTICA',
-        'USER' : 'postgres',
-        'PASSWORD' : 'admin',
-        'HOST' : 'localhost',
-        'PORT' : '5432',
-    }
+    'default': env.db('DATABASE_URL'),
 }
+DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
 # Password validation
@@ -226,7 +230,3 @@ if not DEBUG:
         os.path.join(BASE_DIR, 'build/static')
     ]
 
-    DATABASES = {
-        'default': env.db('DATABASE_URL'),
-    }
-    DATABASES['default']['ATOMIC_REQUESTS'] = True
