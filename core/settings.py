@@ -159,9 +159,21 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 DATABASES = {
-    'default': env.db('DATABASE_URL'),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dbpracticaweb01',
+        'USER' : 'dbpracticaweb01_user',
+        'PASSWORD' : '7qxMbEai5ZbFU2Kn1XwlOMZVqLxyWcMn',
+        'HOST' : 'dpg-d3blciqdbo4c73dght40-a',
+        'PORT' : '5432',
+    }
 }
-DATABASES['default']['ATOMIC_REQUESTS'] = True
+
+
+# DATABASES = {
+#     'default': env.db('DATABASE_URL'),
+# }
+# DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
 # Password validation
