@@ -158,22 +158,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #         'PORT' : '5432',
 #     }
 # }
+
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbpracticaweb01',
-        'USER' : 'dbpracticaweb01_user',
-        'PASSWORD' : '7qxMbEai5ZbFU2Kn1XwlOMZVqLxyWcMn',
-        'HOST' : 'dpg-d3blciqdbo4c73dght40-a',
-        'PORT' : '5432',
-    }
+    'default': env.db('DATABASE_URL'),
 }
-
-
-# DATABASES = {
-#     'default': env.db('DATABASE_URL'),
-# }
-# DATABASES['default']['ATOMIC_REQUESTS'] = True
+DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
 # Password validation
@@ -235,10 +226,5 @@ if not DEBUG:
     CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST_DEPLOY')
     CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY')    
 
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'build/static')
-    ]
 
