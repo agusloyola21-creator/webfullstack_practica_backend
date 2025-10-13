@@ -9,9 +9,9 @@ def home(request):
 
 urlpatterns = [
     path('', home),  # <- agrega esto
-    path('/admin/', admin.site.urls),
-    path('/api/blog/', include('apps.blog.urls')),
-    path('/api/category/', include('apps.category.urls')),
+    path('admin/', admin.site.urls),
+    path('api/blog/', include('apps.blog.urls')),
+    path('api/category/', include('apps.category.urls')),
 
 
 ]  
