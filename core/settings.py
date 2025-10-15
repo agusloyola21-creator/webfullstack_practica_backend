@@ -225,11 +225,11 @@ if not DEBUG:
     ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY')
     # CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST_DEPLOY')
     CORS_ALLOWED_ORIGINS = [
-        "https://gregarious-peony-84c0ff.netlify.app"
+        "https://gregarious-peony-84c0ff.netlify.app/"
     ]
     # CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY')    
 
     CSRF_TRUSTED_ORIGINS = [
-        "https://gregarious-peony-84c0ff.netlify.app"
+        "https://gregarious-peony-84c0ff.netlify.app/"
     ]
 
