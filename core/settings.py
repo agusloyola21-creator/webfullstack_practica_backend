@@ -5,29 +5,44 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
 
-# ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEV')
-# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS_DEV')
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS_DEV', '').split(',')
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://gregarious-peony-84c0ff.netlify.app/",
-]
 
+DEBUG = env.bool("DEBUG", default=True)
+
+
+if DEBUG:
+    # Entorno de desarrollo
+    ALLOWED_HOSTS = env.list("ALLOWED_HOSTS_DEV", default=["*"])
+    CORS_ALLOWED_ORIGINS = env.list(
+        "CORS_ALLOWED_ORIGINS_DEV",
+        default=["http://localhost:3000", "http://127.0.0.1:3000"]
+    )
+    CSRF_TRUSTED_ORIGINS = env.list(
+        "CSRF_TRUSTED_ORIGINS_DEV",
+        default=["http://localhost:3000"]
+    )
+else:
+    # Entorno de producción (Render + Netlify)
+    ALLOWED_HOSTS = env.list(
+        "ALLOWED_HOSTS_DEPLOY",
+        default=[".onrender.com"]
+    )
+    CORS_ALLOWED_ORIGINS = env.list(
+        "CORS_ALLOWED_ORIGINS_DEPLOY",
+        default=["https://gregarious-peony-84c0ff.netlify.app"]
+    )
+    CSRF_TRUSTED_ORIGINS = env.list(
+        "CSRF_TRUSTED_ORIGINS_DEPLOY",
+        default=["https://gregarious-peony-84c0ff.netlify.app"]
+    )
 
 # Application definition
 
@@ -219,18 +234,6 @@ REST_FRAMEWORK = {
     ]
 }
 
-CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST_DEV')
-CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEV')
 
-if not DEBUG:
-    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY')
-    # CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST_DEPLOY')
-    CORS_ALLOWED_ORIGINS = [
-        "https://gregarious-peony-84c0ff.netlify.app"
-    ]
-    # CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY')    
 
-    CSRF_TRUSTED_ORIGINS = [
-        "https://gregarious-peony-84c0ff.netlify.app"
-    ]
 
